@@ -11,6 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67d3be9f2f999ff4fb9ab17f24a74f76, type: 3}
   m_Name: Project Settings
   m_EditorClassIdentifier: 
+  ControllerSettings: {fileID: 11400000, guid: 4948dd2ac8d9f884fb478cf2fac9ac37, type: 2}
   ScreenContext: {fileID: 11400000, guid: 50e7cb66c9be57b4aac8cf7606eb4fe3, type: 2}
   Prefabs:
     ScreenRoot: {fileID: 1239787201608300, guid: 82bd19f62a9aafb4fab9cebcb885309f,
