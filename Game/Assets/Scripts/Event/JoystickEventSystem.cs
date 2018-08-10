@@ -12,9 +12,9 @@ public class JoystickEventSystem : EventSystem
     #endregion
 
     [Inject]
-    private void Construct(float deadZone)
+    private void Construct(ControllerSettings controllerSettings)
     {
-        _deadZone = deadZone;
+        _deadZone = controllerSettings.DeadZone;
     }
 
     protected override void Start()
@@ -23,7 +23,9 @@ public class JoystickEventSystem : EventSystem
 
         if (firstSelectedGameObject == null)
         {
-            firstSelectedGameObject = FindObjectOfType<Button>().gameObject;
+            var firstButtonGameObject = FindObjectOfType<Button>().gameObject;
+            if (firstButtonGameObject != null)
+                firstSelectedGameObject = firstButtonGameObject;
         }
     }
 
@@ -32,10 +34,10 @@ public class JoystickEventSystem : EventSystem
         base.Update();
 
         if (currentSelectedGameObject == null && (
-            Input.GetAxis(InputAxes.Horizontal) > _deadZone ||
-            Input.GetAxis(InputAxes.Horizontal) < -_deadZone ||
-            Input.GetAxis(InputAxes.Vertical) > _deadZone ||
-            Input.GetAxis(InputAxes.Vertical) < -_deadZone))
+            Input.GetAxisRaw(InputAxes.Horizontal) > _deadZone ||
+            Input.GetAxisRaw(InputAxes.Horizontal) < -_deadZone ||
+            Input.GetAxisRaw(InputAxes.Vertical) > _deadZone ||
+            Input.GetAxisRaw(InputAxes.Vertical) < -_deadZone))
         {
             SetSelectedGameObject(firstSelectedGameObject);
         }
