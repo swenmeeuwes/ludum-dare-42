@@ -20,6 +20,11 @@ public class ProjectInstaller : MonoInstaller
             .AsSingle();
 
         Container
+            .Bind<ControllerSettings>()
+            .FromInstance(_settings.ControllerSettings)
+            .AsSingle();
+
+        Container
             .BindInterfacesAndSelfTo<ScreenFactory>()
             .AsSingle()
             .WithArguments(_settings.Prefabs.ScreenRoot);

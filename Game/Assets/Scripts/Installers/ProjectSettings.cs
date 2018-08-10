@@ -10,6 +10,7 @@ public class Prefabs
 [CreateAssetMenu(fileName = "Project Settings", menuName = "Settings/Project Settings")]
 public class ProjectSettings : ScriptableObject
 {
+    public ControllerSettings ControllerSettings;
     public ScreenContext ScreenContext;
     public Prefabs Prefabs;
 }
