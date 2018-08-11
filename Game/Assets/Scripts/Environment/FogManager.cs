@@ -26,6 +26,16 @@ public class FogManager : MonoBehaviour
 
     public Rect ScreenBounds { get; private set; } // todo: Compute this in a Camera class?
 
+    private bool _shrinking;
+    public bool Shrinking {
+        get { return _shrinking; }
+        set
+        {
+            _shrinking = value;
+            _variableStartTime = Time.time;
+        }
+    }
+
     private Rect _shrinkStep; // per second
     private float _variableStartTime; // will be adjusted when extra time is granted to the player (so it is not the ACTUAL start time)
 
@@ -50,7 +60,8 @@ public class FogManager : MonoBehaviour
 
     private void Update()
     {
-        Shrink();
+        if (Shrinking)
+            Shrink();
     }    
 
     private Rect ComputeScreenBounds()
