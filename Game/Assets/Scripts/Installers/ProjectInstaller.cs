@@ -25,6 +25,11 @@ public class ProjectInstaller : MonoInstaller
             .AsSingle();
 
         Container
+            .Bind<GameplaySettings>()
+            .FromInstance(_settings.GameplaySettings)
+            .AsSingle();
+
+        Container
             .BindInterfacesAndSelfTo<InputManager>()
             .AsSingle();            
 

@@ -11,6 +11,7 @@ public class Prefabs
 public class ProjectSettings : ScriptableObject
 {
     public ControllerSettings ControllerSettings;
+    public GameplaySettings GameplaySettings;
     public ScreenContext ScreenContext;
     public Prefabs Prefabs;
 }
