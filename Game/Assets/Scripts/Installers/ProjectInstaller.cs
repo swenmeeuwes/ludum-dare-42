@@ -30,6 +30,10 @@ public class ProjectInstaller : MonoInstaller
             .AsSingle();
 
         Container
+            .BindInterfacesAndSelfTo<BulletManager>()
+            .AsSingle();
+
+        Container
             .BindInterfacesAndSelfTo<InputManager>()
             .AsSingle();            
 
@@ -73,6 +77,16 @@ public class ProjectInstaller : MonoInstaller
             .BindSignal<LoadSceneSignal>()
             .ToMethod<LoadSceneCommand>(command => command.Execute)
             .FromResolve();
+
+        #endregion
+
+        #region MemoryPools
+
+        Container
+            .BindMemoryPool<Bullet, Bullet.Pool>()
+            .WithInitialSize(20)
+            .FromComponentInNewPrefab(_settings.Prefabs.Bullet)
+            .UnderTransformGroup("Bullets");        
 
         #endregion
     }

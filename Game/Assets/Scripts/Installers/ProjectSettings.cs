@@ -5,6 +5,7 @@ using UnityEngine;
 public class Prefabs
 {
     public GameObject ScreenRoot;
+    public GameObject Bullet;
 }
 
 [CreateAssetMenu(fileName = "Project Settings", menuName = "Settings/Project Settings")]

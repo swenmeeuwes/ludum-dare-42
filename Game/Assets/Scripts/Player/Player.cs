@@ -10,22 +10,34 @@ public class Player : MonoBehaviour
 
     private InputManager _inputManager;
     private PlayerMovement _movement; // todo: just use GetComponent<PlayerMovement>(); ?
+    private ControllerSettings _controllerSettings;
+    private PlayerSettings _settings;
+    private BulletManager _bulletManager;
 
     #endregion
 
     public Vector2 LookDirection { get; private set; }
 
+    private float _lastShot;    
+
     [Inject]
-    private void Construct(InputManager inputManager, PlayerMovement movement)
+    private void Construct(InputManager inputManager, PlayerMovement movement, ControllerSettings controllerSettings, 
+        GameplaySettings gameplaySettings, BulletManager bulletManager)
     {
         _inputManager = inputManager;
         _movement = movement;
+        _controllerSettings = controllerSettings;
+        _settings = gameplaySettings.PlayerSettings;
+        _bulletManager = bulletManager;
     }
 
     private void Update()
     {
         LookDirection = GetLookDirection();
-        _lookDirectionIndicator.LookDirection = LookDirection;
+        _lookDirectionIndicator.LookDirection = LookDirection;        
+
+        if (Input.GetButton(InputAxes.Fire1) || Input.GetAxisRaw(InputAxes.Fire1) > _controllerSettings.DeadZone)
+            Shoot();
     }
 
     private Vector2 GetLookDirection()
@@ -58,5 +70,15 @@ public class Player : MonoBehaviour
 
         var relativePositionToMouse = mouseWorldPosition - transform.position;
         return relativePositionToMouse.normalized;
+    }
+
+    private void Shoot()
+    {
+        if (Time.time - _lastShot < _settings.FireRate)
+            return;
+
+        _lastShot = Time.time;
+
+        _bulletManager.Create(BulletOwner.Player, transform.position, LookDirection.normalized * _settings.BulletSpeed);
     }
 }

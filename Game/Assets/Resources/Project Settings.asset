@@ -17,3 +17,4 @@ MonoBehaviour:
   Prefabs:
     ScreenRoot: {fileID: 1239787201608300, guid: 82bd19f62a9aafb4fab9cebcb885309f,
       type: 2}
+    Bullet: {fileID: 1061531330853528, guid: 49a6229ef2f08004a98ad16ebb286100, type: 2}
