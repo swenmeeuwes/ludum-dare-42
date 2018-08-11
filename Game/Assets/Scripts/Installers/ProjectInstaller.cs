@@ -25,6 +25,10 @@ public class ProjectInstaller : MonoInstaller
             .AsSingle();
 
         Container
+            .BindInterfacesAndSelfTo<InputManager>()
+            .AsSingle();            
+
+        Container
             .BindInterfacesAndSelfTo<ScreenFactory>()
             .AsSingle()
             .WithArguments(_settings.Prefabs.ScreenRoot);
@@ -51,6 +55,8 @@ public class ProjectInstaller : MonoInstaller
         Container.DeclareSignal<CloseScreenRequestSignal>();
         Container.DeclareSignal<CloseAllScreensRequestSignal>();
         Container.DeclareSignal<ScreenStateChangedSignal>();
+
+        Container.DeclareSignal<InputTypeChangedSignal>().OptionalSubscriber();
 
         #endregion
 
