@@ -40,10 +40,10 @@ public class NavigationManager : IInitializable, IDisposable, ITickable
 
     public void Dispose()
     {
-        _signalBus.Unsubscribe<OpenScreenRequestSignal>(OnOpenScreenRequest);
-        _signalBus.Unsubscribe<CloseScreenRequestSignal>(OnCloseScreenRequest);
-        _signalBus.Unsubscribe<CloseAllScreensRequestSignal>(OnCloseAllScreensRequest);
-        _signalBus.Unsubscribe<ScreenStateChangedSignal>(OnScreenStateChanged);
+        _signalBus.TryUnsubscribe<OpenScreenRequestSignal>(OnOpenScreenRequest);
+        _signalBus.TryUnsubscribe<CloseScreenRequestSignal>(OnCloseScreenRequest);
+        _signalBus.TryUnsubscribe<CloseAllScreensRequestSignal>(OnCloseAllScreensRequest);
+        _signalBus.TryUnsubscribe<ScreenStateChangedSignal>(OnScreenStateChanged);
     }
 
     public void Tick()
