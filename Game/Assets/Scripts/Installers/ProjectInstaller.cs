@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using DG.Tweening;
 using UnityEngine;
 using Zenject;
 
@@ -10,6 +8,7 @@ public class ProjectInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
+        DOTween.Init();
         SignalBusInstaller.Install(Container);
 
         #region Bindings
