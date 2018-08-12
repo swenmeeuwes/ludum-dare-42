@@ -3,5 +3,6 @@
     ControllerSuggestion,
     StartScreen,
     LoadingScreen,
+    Tutorial,
     Game
 }

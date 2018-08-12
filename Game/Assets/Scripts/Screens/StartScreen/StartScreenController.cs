@@ -21,12 +21,15 @@ public class StartScreenController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.anyKey && !_isLoading)
+        if ((Input.anyKey ||
+            Input.GetButton(InputAxes.Submit)
+            ) 
+            && !_isLoading)
         {
             _isLoading = true;
             _signalBus.Fire(new LoadSceneSignal
             {
-                Scene = Scenes.Game
+                Scene = _nextScene
             });
         }
     }
