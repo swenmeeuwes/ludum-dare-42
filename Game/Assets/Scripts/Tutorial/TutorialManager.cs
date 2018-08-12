@@ -59,7 +59,7 @@ public class TutorialManager : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f + 0.65f);
 
-        _cutsceneText.text = "Shine bright\n(like a diamond?)";
+        _cutsceneText.text = "Shine bright";
         _cutsceneText.DOFade(1f, 1.2f);
 
         yield return new WaitForSeconds(2.5f + 1.2f);
