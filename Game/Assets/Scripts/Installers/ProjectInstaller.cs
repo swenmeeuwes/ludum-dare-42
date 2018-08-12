@@ -19,6 +19,11 @@ public class ProjectInstaller : MonoInstaller
             .AsSingle();
 
         Container
+            .Bind<ProjectSettings>()
+            .FromInstance(_settings)
+            .AsSingle();
+
+        Container
             .Bind<ControllerSettings>()
             .FromInstance(_settings.ControllerSettings)
             .AsSingle();

@@ -8,5 +8,14 @@ class GameSceneInstaller : MonoInstaller
             .BindInterfacesAndSelfTo<GameManager>()
             .AsSingle()
             .NonLazy();
+
+        Container
+            .Bind<EnemyFactory>()
+            .ToSelf()
+            .AsSingle();
+
+        Container
+            .BindInterfacesAndSelfTo<EnemySpawner>()
+            .AsSingle();
     }
 }

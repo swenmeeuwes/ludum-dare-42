@@ -15,3 +15,27 @@ MonoBehaviour:
     FireRate: 0.6
     BulletSpeed: 10
   FogShrinkDuration: 180
+  SpawnCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.0023249388
+      value: 5.012013
+      inSlope: -0.11962066
+      outSlope: -0.11962066
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.05384699
+    - serializedVersion: 3
+      time: 120.057465
+      value: 0.19145623
+      inSlope: -0.0020061675
+      outSlope: -0.0020061675
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.16828524
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

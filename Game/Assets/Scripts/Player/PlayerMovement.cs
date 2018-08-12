@@ -71,9 +71,8 @@ public class PlayerMovement : MonoBehaviour
 
     private bool IsInBounds(Vector2 position)
     {
-        var ppCamera = Camera.main.GetComponent<PixelPerfectCamera>();
-        var width = ppCamera.refResolutionX / ppCamera.assetsPPU;
-        var height = ppCamera.refResolutionY / ppCamera.assetsPPU;
+        var width = PixelPerfectCameraUtil.Width;
+        var height = PixelPerfectCameraUtil.Height;
 
         return position.x > -width / 2f + 0.5f &&
                position.x < width / 2f - 0.5f &&

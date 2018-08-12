@@ -17,4 +17,7 @@ public class GameplaySettings : ScriptableObject
 
     [Tooltip("The time in seconds it takes for the fog to have fully taken over")]
     public float FogShrinkDuration;
+
+    [Tooltip("Vertical Axis: The amount of time in seconds it takes for monsters to spawn, Horizontal Axis: Time elapsed")]
+    public AnimationCurve SpawnCurve;
 }

@@ -19,13 +19,20 @@ public abstract class Enemy : MonoBehaviour
     #region Injected
 
     protected SignalBus SignalBus;
+    private EnemySpawner _enemySpawner;
 
     #endregion
 
     [Inject]
-    private void Construct(SignalBus signalBus)
+    private void Construct(SignalBus signalBus, EnemySpawner enemySpawner)
     {
         SignalBus = signalBus;
+        _enemySpawner = enemySpawner;
+    }
+
+    private void OnDestroy()
+    {
+        _enemySpawner.Deregister(this);
     }
 
     public virtual void Damage(int amount)
