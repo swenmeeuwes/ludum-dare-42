@@ -32,6 +32,9 @@ public class EnemySpawner : IInitializable
 
     public void Spawn()
     {
+        if (_enemies.Count + 1 > _gameplaySettings.MaxEnemies)
+            return;
+
         var enemy = _enemyFactory.Create(EnemyType.Slow); // todo: switch between (random) enemies
         enemy.transform.SetParent(_enemyRoot);
 
