@@ -26,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D _rigidbody;
 
+    [Obsolete]
     private Vector2 _moveVelocity;
 
     [Inject]
@@ -50,7 +51,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _rigidbody.velocity = _moveVelocity;
+        //_rigidbody.MovePosition((Vector2)transform.position + _moveVelocity);
+        //_rigidbody.velocity = _moveVelocity;
     }
 
     private void HandleMovement(float xAxis, float yAxis)
@@ -62,6 +64,7 @@ public class PlayerMovement : MonoBehaviour
             yAxis < -_joystickDeadZone) && IsInBounds(nextPosition))
         {
             _moveVelocity = new Vector2(xAxis, yAxis) * _settings.MovementSpeed;
+            _rigidbody.MovePosition(nextPosition); // todo: Should this be done in fixed update?
         }
         else
         {
