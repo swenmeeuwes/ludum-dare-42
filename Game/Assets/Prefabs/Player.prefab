@@ -220,7 +220,7 @@ MonoBehaviour:
   - {fileID: 114788773856065682}
   - {fileID: 114841503079803312}
   _identifier: 
-  _useSceneContext: 0
+  _useSceneContext: 1
   _context: {fileID: 0}
   _bindType: 0
 --- !u!114 &114788773856065682
@@ -234,6 +234,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbee29d3be502a34799e441ab59c29d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _parts:
+  - {fileID: 212297456585259338}
+  - {fileID: 212920726065211206}
+  - {fileID: 212655388682437684}
   _lookDirectionIndicator: {fileID: 114310790220588260}
 --- !u!114 &114841503079803312
 MonoBehaviour:

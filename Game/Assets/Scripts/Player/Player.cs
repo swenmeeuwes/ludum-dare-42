@@ -1,9 +1,13 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using DG.Tweening;
+using Unity.Collections;
+using UnityEngine;
 using Zenject;
 
 [RequireComponent(typeof(PlayerMovement))]
 public class Player : MonoBehaviour
 {
+    [SerializeField] private SpriteRenderer[] _parts; // For fading
     [SerializeField] private LookDirectionIndicator _lookDirectionIndicator;
 
     #region Injected
@@ -17,8 +21,12 @@ public class Player : MonoBehaviour
     #endregion
 
     public Vector2 LookDirection { get; private set; }
+    public bool Enabled {
+        get { return _movement.enabled; }
+        set { _movement.enabled = value; }
+    }
 
-    private float _lastShot;    
+    private float _lastShot;
 
     [Inject]
     private void Construct(InputManager inputManager, PlayerMovement movement, ControllerSettings controllerSettings, 
@@ -33,11 +41,38 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        if (!Enabled)
+            return;
+
         LookDirection = GetLookDirection();
         _lookDirectionIndicator.LookDirection = LookDirection;        
 
         if (Input.GetButton(InputAxes.Fire1) || Input.GetAxisRaw(InputAxes.Fire1) > _controllerSettings.DeadZone)
             Shoot();
+    }
+
+    public void FadeIn(float waitTime, float duration)
+    {
+        var originalAlphas = new float[_parts.Length];
+        for (var i = 0; i < _parts.Length; i++)
+        {
+            var part = _parts[i];
+            originalAlphas[i] = part.color.a; // save alpha value for later (to restore back)
+            part.color = new Color(part.color.r, part.color.g, part.color.b, 0);
+        }
+
+        StartCoroutine(FadeInCoroutine(waitTime, duration, originalAlphas));
+    }
+
+    private IEnumerator FadeInCoroutine(float waitTime, float duration, float[] originalAlphas)
+    {
+        yield return new WaitForSeconds(waitTime);
+
+        for (var i = 0; i < _parts.Length; i++)
+        {
+            var part = _parts[i];
+            part.DOFade(originalAlphas[i], duration);
+        }
     }
 
     private Vector2 GetLookDirection()
