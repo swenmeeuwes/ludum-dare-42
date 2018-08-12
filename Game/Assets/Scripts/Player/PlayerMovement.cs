@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.U2D;
 using Zenject;
 
 [Serializable]
@@ -54,10 +55,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleMovement(float xAxis, float yAxis)
     {
-        if (xAxis > _joystickDeadZone ||
+        var nextPosition = (Vector2)transform.position + new Vector2(xAxis, yAxis) * _settings.MovementSpeed * Time.deltaTime;
+        if ((xAxis > _joystickDeadZone ||
             xAxis < -_joystickDeadZone ||
             yAxis > _joystickDeadZone ||
-            yAxis < -_joystickDeadZone)
+            yAxis < -_joystickDeadZone) && IsInBounds(nextPosition))
         {
             _moveVelocity = new Vector2(xAxis, yAxis) * _settings.MovementSpeed;
         }
@@ -65,5 +67,17 @@ public class PlayerMovement : MonoBehaviour
         {
             _moveVelocity = Vector2.zero;
         }
+    }
+
+    private bool IsInBounds(Vector2 position)
+    {
+        var ppCamera = Camera.main.GetComponent<PixelPerfectCamera>();
+        var width = ppCamera.refResolutionX / ppCamera.assetsPPU;
+        var height = ppCamera.refResolutionY / ppCamera.assetsPPU;
+
+        return position.x > -width / 2f + 0.5f &&
+               position.x < width / 2f - 0.5f &&
+               position.y > -height / 2f + 0.5f &&
+               position.y < height / 2f - 0.5f;
     }
 }
