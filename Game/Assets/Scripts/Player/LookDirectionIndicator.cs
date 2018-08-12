@@ -2,6 +2,8 @@
 
 public class LookDirectionIndicator : MonoBehaviour
 {
+    [SerializeField] private SpriteRenderer _spriteRenderer;
+
     private Vector2 _lookDirection;
 
     public Vector2 LookDirection
@@ -12,6 +14,12 @@ public class LookDirectionIndicator : MonoBehaviour
             _lookDirection = value;
             SetAngleAccordingToLookDirection(value);
         }
+    }
+
+    public bool Showing
+    {
+        get { return _spriteRenderer.enabled; }
+        set { _spriteRenderer.enabled = value; }
     }
 
     private float ComputeAngle(Vector2 direction)

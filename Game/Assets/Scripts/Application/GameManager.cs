@@ -34,9 +34,9 @@ public class GameManager : IInitializable
     private IEnumerator StartGame()
     {
         _player.Enabled = false;
-        _player.FadeIn(5f, 0.65f);
+        _player.FadeIn(3f, 0.65f);
 
-        yield return new WaitForSeconds(2f + 5f);
+        yield return new WaitForSeconds(1f + 3f);
 
         _player.Enabled = true;
 

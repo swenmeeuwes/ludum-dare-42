@@ -23,7 +23,11 @@ public class Player : MonoBehaviour
     public Vector2 LookDirection { get; private set; }
     public bool Enabled {
         get { return _movement.enabled; }
-        set { _movement.enabled = value; }
+        set
+        {
+            _movement.enabled = value;
+            _lookDirectionIndicator.Showing = value;
+        }
     }
 
     private float _lastShot;
