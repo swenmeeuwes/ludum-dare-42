@@ -21,9 +21,11 @@ GameObject:
   - component: {fileID: 4996495260106520}
   - component: {fileID: 212964217819248366}
   - component: {fileID: 114038061703950752}
+  - component: {fileID: 58628892677715266}
+  - component: {fileID: 50278960713247360}
   m_Layer: 0
   m_Name: Bullet
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41,6 +43,41 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &50278960713247360
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1061531330853528}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!58 &58628892677715266
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1061531330853528}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.1
 --- !u!114 &114038061703950752
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -52,11 +89,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd835796c0cff6d4da9af14faed903b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _torque: 45
+  _bulletSplashPrefab: {fileID: 1361700135556122, guid: deba91741461f0947893057eb76a0bd7,
+    type: 2}
   _sprites:
     PlayerBulletSprite: {fileID: 21300000, guid: aac27b4592f5cae47aa534bdc3acde9c,
       type: 3}
     EnemyBulletSprite: {fileID: 21300000, guid: 894d64537d8f47244b137263faeed771,
       type: 3}
+  _particleMaterials:
+    PlayerParticleMaterial: {fileID: 2100000, guid: 0d712517922ede740b3e01ed10559131,
+      type: 2}
+    EnemyParticleMaterial: {fileID: 2100000, guid: 6000b10e38239254b817600762ae1fd1,
+      type: 2}
+  Damage: 1
 --- !u!212 &212964217819248366
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -92,14 +138,14 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 9
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 894d64537d8f47244b137263faeed771, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.25, y: 0.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0

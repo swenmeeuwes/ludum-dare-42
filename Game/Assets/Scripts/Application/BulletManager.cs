@@ -28,6 +28,7 @@ public class BulletManager : ITickable
 
     public void Destroy(Bullet bullet)
     {
+        bullet.DespawnPending = false;
         _bullets.Remove(bullet);
         _bulletPool.Despawn(bullet);
     }
@@ -36,7 +37,7 @@ public class BulletManager : ITickable
     {
         _bullets.ForEach(bullet =>
         {
-            if (!ScreenUtil.WorldPositionIsInView(bullet.transform.position))
+            if (!ScreenUtil.WorldPositionIsInView(bullet.transform.position) || bullet.DespawnPending)
                 Destroy(bullet);
         });
     }

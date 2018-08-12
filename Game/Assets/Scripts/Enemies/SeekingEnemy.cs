@@ -21,6 +21,9 @@ public class SeekingEnemy : Enemy
 
     private void Update()
     {
+        if (IsBeingHit || IsDieing)
+            return;
+
         var directionToPlayer = (_player.transform.position - transform.position).normalized;
         transform.Translate(directionToPlayer * Time.deltaTime);
     }

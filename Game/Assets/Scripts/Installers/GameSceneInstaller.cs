@@ -4,6 +4,8 @@ class GameSceneInstaller : MonoInstaller
 {
     public override void InstallBindings()
     {
+        #region Bindings
+
         Container
             .BindInterfacesAndSelfTo<GameManager>()
             .AsSingle()
@@ -17,5 +19,15 @@ class GameSceneInstaller : MonoInstaller
         Container
             .BindInterfacesAndSelfTo<EnemySpawner>()
             .AsSingle();
+
+        #endregion
+
+        #region Signals
+
+        Container
+            .DeclareSignal<EnemyKilledSignal>()
+            .OptionalSubscriber();
+
+        #endregion
     }
 }
