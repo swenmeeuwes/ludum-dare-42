@@ -133,9 +133,14 @@ public class TutorialManager : MonoBehaviour
 
         yield return new WaitForSeconds(3f + 0.25f);
 
+        StartCoroutine(EndTutorial());
+    }
+
+    private IEnumerator EndTutorial()
+    {
         _cutscenePanel.DOFade(1f, 4f);
 
-        yield return new WaitForSeconds(1f + 1.5f);
+        yield return new WaitForSeconds(1f + 4f);
 
         // End
         _sceneLoader.LoadAsync(Scenes.Game);
