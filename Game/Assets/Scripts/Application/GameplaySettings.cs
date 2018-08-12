@@ -8,6 +8,12 @@ public class PlayerSettings
     public float FireRate;
 
     public float BulletSpeed;
+
+    [Tooltip("How long (seconds) can the player stand in the fog?")]
+    public float FogSurvivalTime;
+    [Tooltip("Restore rate per second")]
+    [Range(0, 1)]
+    public float FogCorruptionRestoreRate;
 }
 
 [CreateAssetMenu(fileName = "Gameplay Settings", menuName = "Settings/Gameplay Settings")]

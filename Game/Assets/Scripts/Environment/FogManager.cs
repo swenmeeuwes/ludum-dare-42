@@ -62,7 +62,17 @@ public class FogManager : MonoBehaviour
     {
         if (Shrinking)
             Shrink();
-    }    
+    }
+
+    public void GrantTime(float seconds)
+    {
+        _variableStartTime += seconds;
+    }
+
+    public void TakeTime(float seconds)
+    {
+        _variableStartTime -= seconds;
+    }
 
     private Rect ComputeScreenBounds()
     {

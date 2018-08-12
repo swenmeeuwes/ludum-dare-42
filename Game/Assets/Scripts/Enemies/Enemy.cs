@@ -11,6 +11,7 @@ public class EnemySettings
     public int Health;
     public float Speed;
     public int PointsWorth;
+    public float SecondsWorth;
 }
 
 public abstract class Enemy : MonoBehaviour
@@ -24,6 +25,8 @@ public abstract class Enemy : MonoBehaviour
     private EnemySpawner _enemySpawner;
 
     #endregion
+
+    public float SecondsWorth { get { return Stats.SecondsWorth; } }
 
     protected bool IsBeingHit;
     protected bool IsDieing;

@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 199501847853882008}
   - component: {fileID: 114861537510307272}
   m_Layer: 0
-  m_Name: BulletSplash
+  m_Name: BulletSplashParticleSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -1,11 +1,13 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using Zenject;
 
-public class GameManager : IInitializable
+public class GameManager : IInitializable, IDisposable
 {
     #region Injected
 
+    private SignalBus _signalBus;
     private Player _player;
     private FogManager _fogManager;
     private MonoBehaviourUtil _monoBehaviourUtil;
@@ -17,8 +19,9 @@ public class GameManager : IInitializable
     private float _timeStarted;
 
     [Inject]
-    private void Construct(Player player, FogManager fogManager, MonoBehaviourUtil monoBehaviourUtil, GameplaySettings gameplaySettings, EnemySpawner enemySpawner)
+    private void Construct(SignalBus signalBus, Player player, FogManager fogManager, MonoBehaviourUtil monoBehaviourUtil, GameplaySettings gameplaySettings, EnemySpawner enemySpawner)
     {
+        _signalBus = signalBus;
         _player = player;
         _fogManager = fogManager;
         _monoBehaviourUtil = monoBehaviourUtil;
@@ -29,6 +32,18 @@ public class GameManager : IInitializable
     public void Initialize()
     {
         _monoBehaviourUtil.StartCoroutine(StartGame());
+
+        _signalBus.Subscribe<EnemyKilledSignal>(OnEnemyKilled);
+    }
+
+    public void Dispose()
+    {
+        _signalBus.Unsubscribe<EnemyKilledSignal>(OnEnemyKilled);
+    }
+
+    private void OnEnemyKilled(EnemyKilledSignal signal)
+    {
+        _fogManager.GrantTime(signal.Enemy.SecondsWorth);
     }
 
     private IEnumerator StartGame()

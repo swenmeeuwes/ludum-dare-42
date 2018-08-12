@@ -30,6 +30,9 @@ public class Player : MonoBehaviour
         }
     }
 
+    public bool IsInFog { get; private set; }
+    public float FogCorruption { get; private set; } // range of 0 - 1 (above 1 = death)
+
     private float _lastShot;
 
     [Inject]
@@ -53,6 +56,27 @@ public class Player : MonoBehaviour
 
         if (Input.GetButton(InputAxes.Fire1) || Input.GetAxisRaw(InputAxes.Fire1) > _controllerSettings.DeadZone)
             Shoot();
+
+        if (IsInFog)
+        {
+            FogCorruption += Time.deltaTime / _settings.FogSurvivalTime;
+        }
+        else if (FogCorruption > 0)
+        {
+            FogCorruption -= _settings.FogCorruptionRestoreRate * Time.deltaTime;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == Tag.Fog.ToString())
+            IsInFog = true;
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.tag == Tag.Fog.ToString())
+            IsInFog = false;
     }
 
     public void FadeIn(float waitTime, float duration)

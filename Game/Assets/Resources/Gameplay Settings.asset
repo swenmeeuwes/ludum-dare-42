@@ -14,27 +14,47 @@ MonoBehaviour:
   PlayerSettings:
     FireRate: 0.6
     BulletSpeed: 10
+    FogSurvivalTime: 5
+    FogCorruptionRestoreRate: 0.5
   FogShrinkDuration: 180
   SpawnCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0.0023249388
-      value: 5.012013
-      inSlope: -0.11962066
-      outSlope: -0.11962066
+      value: 6.04398
+      inSlope: -0.06259626
+      outSlope: -0.06259626
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.05384699
+      outWeight: 0.049868666
     - serializedVersion: 3
-      time: 120.057465
-      value: 0.19145623
-      inSlope: -0.0020061675
-      outSlope: -0.0020061675
+      time: 60.144817
+      value: 4.0321302
+      inSlope: -0.01434126
+      outSlope: -0.01434126
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.16828524
+      inWeight: 0.33333334
+      outWeight: 0.11577695
+    - serializedVersion: 3
+      time: 105.53001
+      value: 2.0365946
+      inSlope: -0.03491244
+      outSlope: -0.03491244
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 180.99513
+      value: 0.988049
+      inSlope: 0.0024829893
+      outSlope: 0.0024829893
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.11731687
       outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2

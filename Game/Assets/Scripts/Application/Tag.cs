@@ -1,5 +1,6 @@
 ﻿public enum Tag
 {
     Bullet,
-    Player
+    Player,
+    Fog
 }

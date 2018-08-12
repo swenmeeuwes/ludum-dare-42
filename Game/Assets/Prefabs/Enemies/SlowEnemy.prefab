@@ -182,9 +182,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Stats:
-    Health: 5
+    Health: 2
     Speed: 0.6
     PointsWorth: 1
+    SecondsWorth: 5
   _enemyBody: {fileID: 114279841276793840}
 --- !u!114 &114279841276793840
 MonoBehaviour:
