@@ -67,6 +67,9 @@ public class FogManager : MonoBehaviour
     public void GrantTime(float seconds)
     {
         _variableStartTime += seconds;
+
+        if (Time.time - _variableStartTime < 0) // prevent gaining more time than the start amount
+            _variableStartTime = Time.time;
     }
 
     public void TakeTime(float seconds)
