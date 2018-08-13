@@ -35,14 +35,15 @@ public class EnemySpawner : IInitializable
         if (_enemies.Count + 1 > _gameplaySettings.MaxEnemies)
             return;
 
-        var enemy = _enemyFactory.Create(EnemyType.Slow); // todo: switch between (random) enemies
+        var enemy = GenerateRandomEnemy();
         enemy.transform.SetParent(_enemyRoot);
+        _enemies.Add(enemy);
 
         // randomized spawn coördinates
         float x = 0;
         float y = 0;
 
-        var side = (Side)Random.Range(0, 3);
+        var side = (Side)Random.Range(0, 3 + 1);
         switch (side)
         {
             case Side.Top:
@@ -69,5 +70,18 @@ public class EnemySpawner : IInitializable
     public void Deregister(Enemy enemy)
     {
         _enemies.Remove(enemy);
+    }
+
+    private Enemy GenerateRandomEnemy()
+    {
+        var enemyType = (EnemyType)Random.Range(0, 1 + 1);
+        switch (enemyType)
+        {
+            case EnemyType.Fast:
+                return _enemyFactory.Create(EnemyType.Fast);
+            case EnemyType.Slow:
+            default:
+                return _enemyFactory.Create(EnemyType.Slow);
+        }
     }
 }

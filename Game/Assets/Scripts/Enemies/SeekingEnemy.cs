@@ -37,6 +37,6 @@ public class SeekingEnemy : Enemy
             return;
 
         var directionToPlayer = (_player.transform.position - transform.position).normalized;
-        transform.Translate(directionToPlayer * Time.deltaTime);
+        transform.Translate(directionToPlayer * Stats.Speed * Time.deltaTime);
     }
 }

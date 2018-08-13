@@ -23,30 +23,30 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0.0023249388
       value: 6.04398
-      inSlope: -0.06259626
-      outSlope: -0.06259626
+      inSlope: -0.1505739
+      outSlope: -0.1505739
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.049868666
+      outWeight: 0.049098033
     - serializedVersion: 3
-      time: 60.144817
-      value: 4.0321302
-      inSlope: -0.01434126
-      outSlope: -0.01434126
+      time: 59.97163
+      value: 1.55128
+      inSlope: 0.0020252026
+      outSlope: 0.0020252026
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
+      inWeight: 0.1335625
       outWeight: 0.11577695
     - serializedVersion: 3
-      time: 105.53001
-      value: 2.0365946
-      inSlope: -0.03491244
-      outSlope: -0.03491244
+      time: 108.301186
+      value: 1.1593363
+      inSlope: -0.008963002
+      outSlope: -0.008963002
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.33333334
+      outWeight: 0.13274238
     - serializedVersion: 3
       time: 180.99513
       value: 0.988049
@@ -59,4 +59,28 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  MaxEnemies: 2
+  SpawnAmountCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1.0007629
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 180.42598
+      value: 10.215633
+      inSlope: 0.1362206
+      outSlope: 0.1362206
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.09764171
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  MaxEnemies: 30

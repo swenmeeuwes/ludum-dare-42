@@ -110,7 +110,7 @@ public abstract class Enemy : MonoBehaviour
         IsDieing = true;
         EnemyBody.Animator.SetTrigger("Die");
 
-        EnemyBody.SpriteRenderer.DOFade(0f, 0.5f);
+        EnemyBody.SpriteRenderer.DOFade(0f, 0.5f).OnComplete(OnDieAnimationFinished);
     }
 
     public void OnHitAnimationFinished()

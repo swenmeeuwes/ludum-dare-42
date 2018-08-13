@@ -20,6 +20,8 @@ public class EnemyFactory
     {
         switch (type)
         {
+            case EnemyType.Fast:
+                return _container.InstantiatePrefabForComponent<SeekingEnemy>(_projectSettings.Prefabs.FastEnemy);
             default:
             case EnemyType.Slow:
                 return _container.InstantiatePrefabForComponent<SeekingEnemy>(_projectSettings.Prefabs.SlowEnemy);
