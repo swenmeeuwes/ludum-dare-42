@@ -23,6 +23,16 @@ public class SeekingEnemy : Enemy
     {
         base.Update();
 
+        // Flip sprite accordingly (todo: in enemy base class?)
+        var relativePositionToPlayer = _player.transform.position - transform.position;
+        if (relativePositionToPlayer.x < -0.5)
+        {
+            EnemyBody.SpriteRenderer.flipX = true;
+        } else if (relativePositionToPlayer.x > 0.5)
+        {
+            EnemyBody.SpriteRenderer.flipX = false;
+        }
+
         if (IsBeingHit || IsDieing || IsAttacking)
             return;
 
