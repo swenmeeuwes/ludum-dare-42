@@ -20,6 +20,16 @@ class GameSceneInstaller : MonoInstaller
             .BindInterfacesAndSelfTo<EnemySpawner>()
             .AsSingle();
 
+        Container
+            .Bind<PowerupFactory>()
+            .ToSelf()
+            .AsSingle();
+
+        Container
+            .Bind<HintTextFactory>()
+            .ToSelf()
+            .AsSingle();
+
         #endregion
 
         #region Signals

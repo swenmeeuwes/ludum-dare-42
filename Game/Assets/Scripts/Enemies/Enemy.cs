@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using Zenject;
+using Random = UnityEngine.Random;
 
 [Serializable]
 public class EnemySettings
@@ -18,7 +19,7 @@ public class EnemySettings
 
 public abstract class Enemy : MonoBehaviour
 {
-    [SerializeField] protected EnemySettings Stats;
+    [SerializeField] private EnemySettings _stats;
     [SerializeField] protected EnemyBody EnemyBody;
 
     #region Injected
@@ -26,8 +27,15 @@ public abstract class Enemy : MonoBehaviour
     protected SignalBus SignalBus;
     private EnemySpawner _enemySpawner;
     private FogManager _fogManager;
+    private PowerupFactory _powerupFactory;
+    private GameplaySettings _gameplaySettings;
 
     #endregion
+
+    public EnemySettings Stats {
+        get { return _stats; }
+        set { _stats = value; } 
+    }
 
     public float SecondsWorth { get { return Stats.SecondsWorth; } }
 
@@ -38,11 +46,13 @@ public abstract class Enemy : MonoBehaviour
     private Player _playerBeingAttacked;
 
     [Inject]
-    private void Construct(SignalBus signalBus, EnemySpawner enemySpawner, FogManager fogManager)
+    private void Construct(SignalBus signalBus, EnemySpawner enemySpawner, FogManager fogManager, PowerupFactory powerupFactory, GameplaySettings gameplaySettings)
     {
         SignalBus = signalBus;
         _enemySpawner = enemySpawner;
         _fogManager = fogManager;
+        _powerupFactory = powerupFactory;
+        _gameplaySettings = gameplaySettings;
     }
 
     protected virtual void Update()
@@ -65,7 +75,7 @@ public abstract class Enemy : MonoBehaviour
         {
             // Bullet hit
             var bullet = other.GetComponent<Bullet>();
-            if (bullet != null && bullet.Owner == BulletOwner.Player && !bullet.DespawnPending)
+            if (bullet != null && bullet.Owner == BulletOwner.Player && !bullet.DespawnPending && !IsDieing)
             {
                 // Entity was hit by a player bullet
                 Damage(bullet.Damage);
@@ -121,6 +131,13 @@ public abstract class Enemy : MonoBehaviour
 
     public void OnDieAnimationFinished()
     {
+        if (Random.value <= _gameplaySettings.PowerupDropChance)
+        {
+            var randomPowerupType = (PowerupType) Random.Range(0, 1 + 1);
+            var powerup = _powerupFactory.Create(randomPowerupType);
+            powerup.transform.position = transform.position;
+        }
+
         Destroy(gameObject);
     }
 }

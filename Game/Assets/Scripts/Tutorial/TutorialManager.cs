@@ -46,6 +46,15 @@ public class TutorialManager : MonoBehaviour
         StartCoroutine(PlayTutorial());
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            StopAllCoroutines();
+            StartCoroutine(SkipTutorial());
+        }
+    }
+
     private IEnumerator PlayTutorial()
     {
         // HARD CODE BOYS
@@ -143,6 +152,13 @@ public class TutorialManager : MonoBehaviour
         yield return new WaitForSeconds(1f + 4f);
 
         // End
+        _sceneLoader.LoadAsync(Scenes.Game);
+    }
+
+    private IEnumerator SkipTutorial()
+    {
+        _cutscenePanel.DOFade(1f, 0.5f);
+        yield return new WaitForSeconds(0.5f);
         _sceneLoader.LoadAsync(Scenes.Game);
     }
 }

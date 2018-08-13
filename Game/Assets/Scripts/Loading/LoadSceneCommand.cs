@@ -22,23 +22,23 @@ public class LoadSceneCommand : ICommand<LoadSceneSignal>
 
     public void Execute(LoadSceneSignal signal)
     {
-        _signalBus.Fire(new OpenScreenRequestSignal
-        {
-            Type = ScreenType.Loading
-        });
+        //_signalBus.Fire(new OpenScreenRequestSignal
+        //{
+        //    Type = ScreenType.Loading
+        //});
 
         var loadOperation = _sceneLoader.LoadAsync(signal.Scene);
-        _monoBehaviourUtil.StartCoroutine(HandleAsyncLoading(loadOperation));
+        //_monoBehaviourUtil.StartCoroutine(HandleAsyncLoading(loadOperation));
     }    
 
-    private IEnumerator HandleAsyncLoading(AsyncOperation operation)
-    {
-        // Yield to prevent a flashing loading screen
-        yield return new WaitForSeconds(0.2f);
+    //private IEnumerator HandleAsyncLoading(AsyncOperation operation)
+    //{
+    //    // Yield to prevent a flashing loading screen
+    //    //yield return new WaitForSeconds(0.2f);
 
-        yield return new WaitUntil(() => operation.isDone);
+    //    //yield return new WaitUntil(() => operation.isDone);
 
-        // todo: strong reference to loading screen
-        _signalBus.Fire(new CloseAllScreensRequestSignal());
-    }
+    //    //// todo: strong reference to loading screen
+    //    //_signalBus.Fire(new CloseAllScreensRequestSignal());
+    //}
 }

@@ -73,15 +73,16 @@ public class Bullet : MonoBehaviour
         DespawnPending = true;
     }
 
-    public class Pool : MonoMemoryPool<BulletOwner, Vector2, Vector2, Bullet>
+    public class Pool : MonoMemoryPool<BulletOwner, Vector2, Vector2, int, Bullet>
     {
-        protected override void Reinitialize(BulletOwner owner, Vector2 position, Vector2 velocity, Bullet item)
+        protected override void Reinitialize(BulletOwner owner, Vector2 position, Vector2 velocity, int damage, Bullet item)
         {
-            base.Reinitialize(owner, position, velocity, item);
+            base.Reinitialize(owner, position, velocity, damage, item);
 
             item.Owner = owner;
             item.transform.position = position;
             item.Velocity = velocity;
+            item.Damage = damage;
         }
     }
 

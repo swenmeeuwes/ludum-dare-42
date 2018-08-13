@@ -97,10 +97,18 @@ public class GameManager : IInitializable, IDisposable
         var timePlaying = Time.time - TimeStarted;
         var nextSpawn = _gameplaySettings.SpawnCurve.Evaluate(timePlaying);
         var spawnAmount = Mathf.RoundToInt(_gameplaySettings.SpawnAmountCurve.Evaluate(timePlaying));
+        var spawnHealthModifier = _gameplaySettings.SpawnHealthModifier.Evaluate(timePlaying);
 
         for (var i = 0; i < spawnAmount; i++)
-        {            
-            _enemySpawner.Spawn();
+        {
+            var enemy = _enemySpawner.Spawn();
+            if (enemy != null) // can be null if max limit enemies is reached 
+            {
+                var stats = enemy.Stats;
+                stats.Health = Mathf.RoundToInt(stats.Health * spawnHealthModifier);
+
+                enemy.Stats = stats;
+            }
         }
 
         yield return new WaitForSeconds(nextSpawn);

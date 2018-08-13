@@ -22,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private PlayerMovementSettings _settings;
     public PlayerMovementSettings Settings {
         get { return _settings; }
+        set { _settings = value; }
     }
 
     private Rigidbody2D _rigidbody;

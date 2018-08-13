@@ -16,12 +16,15 @@ public class Player : MonoBehaviour
     private PlayerMovement _movement; // todo: just use GetComponent<PlayerMovement>(); ?
     private ControllerSettings _controllerSettings;
     private PlayerSettings _settings;
+    private GameplaySettings _gameplaySettings;
     private BulletManager _bulletManager;
-    private FogManager _fogManager;
+    [InjectOptional] private FogManager _fogManager;
     [InjectOptional] private GameManager _gameManager;
 
     #endregion
 
+    [Header("_DEBUG")]
+    public PlayerSettings Stats;
     public Vector2 LookDirection { get; private set; }
     public bool Enabled {
         get { return _movement.enabled; }
@@ -40,7 +43,7 @@ public class Player : MonoBehaviour
         {
             _fogCorruption = value;
             if (value >= 1 && _gameManager.State == GameState.Playing)
-                _gameManager.GameOver();;
+                _gameManager.GameOver();
         } 
     }
 
@@ -48,14 +51,20 @@ public class Player : MonoBehaviour
 
     [Inject]
     private void Construct(InputManager inputManager, PlayerMovement movement, ControllerSettings controllerSettings, 
-        GameplaySettings gameplaySettings, BulletManager bulletManager, FogManager fogManager)
+        GameplaySettings gameplaySettings, BulletManager bulletManager)
     {
         _inputManager = inputManager;
         _movement = movement;
         _controllerSettings = controllerSettings;
         _settings = gameplaySettings.PlayerSettings;
+        _gameplaySettings = gameplaySettings;
         _bulletManager = bulletManager;
-        _fogManager = fogManager;
+        //_fogManager = fogManager;
+    }
+
+    private void Start()
+    {
+        Stats = Instantiate(_gameplaySettings).PlayerSettings;
     }
 
     private void Update()
@@ -68,14 +77,14 @@ public class Player : MonoBehaviour
 
         if (Input.GetButton(InputAxes.Fire1) || Input.GetAxisRaw(InputAxes.Fire1) > _controllerSettings.DeadZone)
             Shoot();
-
+        
         if (IsInFog)
         {
-            FogCorruption += Time.deltaTime / _settings.FogSurvivalTime;
+            FogCorruption += Time.deltaTime / Stats.FogSurvivalTime;
         }
         else if (FogCorruption > 0)
         {
-            FogCorruption -= _settings.FogCorruptionRestoreRate * Time.deltaTime;
+            FogCorruption -= Stats.FogCorruptionRestoreRate * Time.deltaTime;
         }
     }
 
@@ -97,10 +106,32 @@ public class Player : MonoBehaviour
             if (bullet != null && bullet.Owner == BulletOwner.Enemy && !bullet.DespawnPending)
             {
                 // Player was hit by a enemy bullet
-                FogCorruption -= bullet.Damage;
+                FogCorruption += 0.05f;
                 _fogManager.TakeTime(bullet.Damage);
 
                 bullet.Hit(transform);
+            }
+        }
+
+        if (other.tag == Tag.Powerup.ToString())
+        {
+            var powerup = other.GetComponent<Powerup>();
+            if (powerup != null && !powerup.Used)
+            {
+                powerup.Use();
+
+                switch (powerup.Type)
+                {
+                    case PowerupType.FireRate:
+                        Stats.FireRate -= 0.05f;
+                        if (Stats.FireRate < 0.05f)
+                            Stats.FireRate = 0.05f;
+                        break;
+                    case PowerupType.Damage:
+                    default:
+                        Stats.BulletDamage += _gameplaySettings.PowerupStatIncrease;
+                        break;                        
+                }
             }
         }
     }
@@ -119,7 +150,7 @@ public class Player : MonoBehaviour
 
     public void Corrupt(float amount)
     {
-        FogCorruption += amount + _settings.FogCorruptionRestoreRate * Time.deltaTime; // + restore compensation
+        FogCorruption += amount + Stats.FogCorruptionRestoreRate * Time.deltaTime; // + restore compensation
     }
 
     public void FadeIn(float waitTime, float duration)
@@ -180,7 +211,7 @@ public class Player : MonoBehaviour
 
     private void Shoot()
     {
-        if (Time.time - _lastShot < _settings.FireRate)
+        if (Time.time - _lastShot < Stats.FireRate)
             return;
 
         _lastShot = Time.time;

@@ -8,6 +8,7 @@ public class PlayerSettings
     public float FireRate;
 
     public float BulletSpeed;
+    public float BulletDamage;
 
     [Tooltip("How long (seconds) can the player stand in the fog?")]
     public float FogSurvivalTime;
@@ -28,6 +29,11 @@ public class GameplaySettings : ScriptableObject
     public AnimationCurve SpawnCurve;
     [Tooltip("Vertical Axis: The amount of monsters that will be created per spawn, Horizontal Axis: Time elapsed")]
     public AnimationCurve SpawnAmountCurve;
+    [Tooltip("Vertical Axis: Monsters will have their health multiplied by this amount, Horizontal Axis: Time elapsed")]
+    public AnimationCurve SpawnHealthModifier;
 
     public int MaxEnemies;
+
+    [Range(0, 1)] public float PowerupDropChance;
+    public float PowerupStatIncrease; // increment when picked up todo: for individual powerup types
 }

@@ -18,9 +18,11 @@ MonoBehaviour:
     ScreenRoot: {fileID: 1239787201608300, guid: 82bd19f62a9aafb4fab9cebcb885309f,
       type: 2}
     Bullet: {fileID: 1061531330853528, guid: 49a6229ef2f08004a98ad16ebb286100, type: 2}
+    HintText: {fileID: 1870119724875080, guid: edca0b8e29e41134d88d346052f1bc6e, type: 2}
     SlowEnemy: {fileID: 1408833615104576, guid: 6e90b7ce2e9f2c743874df5e146728a1,
       type: 2}
     FastEnemy: {fileID: 1408833615104576, guid: 541ae34ce37f55b49b20ed31ba7d2c55,
       type: 2}
     ShootingEnemy: {fileID: 1408833615104576, guid: 99092174f6cbce348a819fd9b6872378,
       type: 2}
+    Powerup: {fileID: 1572118631665122, guid: 292444030448b9c4c88e3bcfd5228940, type: 2}

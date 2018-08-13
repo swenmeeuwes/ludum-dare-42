@@ -14,6 +14,7 @@ MonoBehaviour:
   PlayerSettings:
     FireRate: 0.6
     BulletSpeed: 10
+    BulletDamage: 1
     FogSurvivalTime: 5
     FogCorruptionRestoreRate: 0.5
   FogShrinkDuration: 180
@@ -22,39 +23,39 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0.0023249388
-      value: 6.04398
-      inSlope: -0.1505739
-      outSlope: -0.1505739
+      value: 5.0493894
+      inSlope: -0.23751907
+      outSlope: -0.23751907
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.049098033
+      outWeight: 0.043862972
     - serializedVersion: 3
-      time: 59.97163
-      value: 1.55128
-      inSlope: 0.0020252026
-      outSlope: 0.0020252026
+      time: 61.167294
+      value: 1.5245013
+      inSlope: -0.051283553
+      outSlope: -0.051283553
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.1335625
+      inWeight: 0.08790579
       outWeight: 0.11577695
     - serializedVersion: 3
-      time: 108.301186
-      value: 1.1593363
-      inSlope: -0.008963002
-      outSlope: -0.008963002
+      time: 121.93156
+      value: 0.86480725
+      inSlope: -0.022953194
+      outSlope: -0.022953194
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
+      inWeight: 0.11762079
       outWeight: 0.13274238
     - serializedVersion: 3
-      time: 180.99513
-      value: 0.988049
-      inSlope: 0.0024829893
-      outSlope: 0.0024829893
+      time: 249.65382
+      value: 0.26267666
+      inSlope: -0.0061899098
+      outSlope: -0.0061899098
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.11731687
+      inWeight: 0.071145765
       outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -65,22 +66,57 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 1.0007629
-      inSlope: 0
-      outSlope: 0
+      inSlope: 0.016728656
+      outSlope: 0.016728656
       tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.09665071
+    - serializedVersion: 3
+      time: 198.55003
+      value: 4.826032
+      inSlope: 0.029243171
+      outSlope: 0.029243171
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.12447889
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  SpawnHealthModifier:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.0021843417
+      value: 0.99973404
+      inSlope: 0.00054412894
+      outSlope: 0.00054412894
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 180.42598
-      value: 10.215633
-      inSlope: 0.1362206
-      outSlope: 0.1362206
+      time: 80.715805
+      value: 1.043655
+      inSlope: -0.00093513203
+      outSlope: -0.00093513203
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.09764171
+      inWeight: 0.33333334
+      outWeight: 0.07601309
+    - serializedVersion: 3
+      time: 299.7985
+      value: 9.964022
+      inSlope: 0.124478325
+      outSlope: 0.124478325
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.043740816
       outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
   MaxEnemies: 30
+  PowerupDropChance: 0.15
+  PowerupStatIncrease: 0.5

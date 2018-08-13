@@ -181,11 +181,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f10dfc93088978146acccdc6eaaaf5ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Stats:
-    Health: 2
-    Speed: 0.6
-    PointsWorth: 1
-    SecondsWorth: 5
+  _stats:
+    Health: 3
+    Speed: 0.4
+    PointsWorth: 3
+    SecondsWorth: 2
     FogCorruptionPerSecond: 5
     CorruptionPerSecond: 0.1
   EnemyBody: {fileID: 114279841276793840}

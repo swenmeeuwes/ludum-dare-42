@@ -30,10 +30,10 @@ public class EnemySpawner : IInitializable
         _spawnBounds = PixelPerfectCameraUtil.Bounds.Expand(1f);
     }
 
-    public void Spawn()
+    public Enemy Spawn()
     {
         if (_enemies.Count + 1 > _gameplaySettings.MaxEnemies)
-            return;
+            return null;
 
         var enemy = GenerateRandomEnemy();
         enemy.transform.SetParent(_enemyRoot);
@@ -65,6 +65,8 @@ public class EnemySpawner : IInitializable
         }
 
         enemy.transform.position = new Vector2(x, y);
+
+        return enemy;
     }
 
     public void Deregister(Enemy enemy)

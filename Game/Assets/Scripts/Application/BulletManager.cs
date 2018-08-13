@@ -18,9 +18,9 @@ public class BulletManager : ITickable
         _bulletPool = bulletPool;
     }
 
-    public Bullet Create(BulletOwner owner, Vector2 position, Vector2 velocity)
+    public Bullet Create(BulletOwner owner, Vector2 position, Vector2 velocity, int damage = 1)
     {
-        var bullet = _bulletPool.Spawn(owner, position, velocity);
+        var bullet = _bulletPool.Spawn(owner, position, velocity, damage);
         _bullets.Add(bullet);
 
         return bullet;

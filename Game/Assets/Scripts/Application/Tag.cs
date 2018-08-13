@@ -3,5 +3,6 @@
     Bullet,
     Player,
     Fog,
-    Enemy
+    Enemy,
+    Powerup
 }

@@ -139,13 +139,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f10dfc93088978146acccdc6eaaaf5ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Stats:
+  _stats:
     Health: 1
-    Speed: 3
+    Speed: 2.5
     PointsWorth: 1
-    SecondsWorth: 4
-    FogCorruptionPerSecond: 5
-    CorruptionPerSecond: 0.15
+    SecondsWorth: 1
+    FogCorruptionPerSecond: 3
+    CorruptionPerSecond: 0.1
   EnemyBody: {fileID: 114279841276793840}
 --- !u!114 &114279841276793840
 MonoBehaviour:

@@ -74,15 +74,22 @@ public class ShootingEnemy : Enemy
 
         _lastShot = Time.time;
 
+        StartCoroutine(ShootSequence());
+    }
+
+    private IEnumerator ShootSequence()
+    {
         var bulletOrigin = _bulletOrigin.position;
         if (EnemyBody.SpriteRenderer.flipX) // take in account the sprite flip
             bulletOrigin.x -= _bulletOrigin.localPosition.x;
 
-        //var correctedPlayerPosition = _player.transform.position;
-        //correctedPlayerPosition.y -= 0.3f;
-
         var vectorToPlayer = _player.transform.position - bulletOrigin;
-        _bulletManager.Create(BulletOwner.Enemy,
-            bulletOrigin, vectorToPlayer.normalized * _bulletSpeed);
+
+        for (var i = 0; i < Random.Range(2, 4); i++)
+        { 
+            _bulletManager.Create(BulletOwner.Enemy,
+                bulletOrigin, vectorToPlayer.normalized * _bulletSpeed);
+            yield return new WaitForSeconds(0.1f);
+        }
     }
 }
