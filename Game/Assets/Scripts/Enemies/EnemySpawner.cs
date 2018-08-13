@@ -74,11 +74,13 @@ public class EnemySpawner : IInitializable
 
     private Enemy GenerateRandomEnemy()
     {
-        var enemyType = (EnemyType)Random.Range(0, 1 + 1);
+        var enemyType = (EnemyType)Random.Range(0, 2 + 1);
         switch (enemyType)
         {
             case EnemyType.Fast:
                 return _enemyFactory.Create(EnemyType.Fast);
+            case EnemyType.Shooting:
+                return _enemyFactory.Create(EnemyType.Shooting);
             case EnemyType.Slow:
             default:
                 return _enemyFactory.Create(EnemyType.Slow);

@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
     private ControllerSettings _controllerSettings;
     private PlayerSettings _settings;
     private BulletManager _bulletManager;
+    private FogManager _fogManager;
+    [InjectOptional] private GameManager _gameManager;
 
     #endregion
 
@@ -31,19 +33,29 @@ public class Player : MonoBehaviour
     }
 
     public bool IsInFog { get; private set; }
-    public float FogCorruption { get; private set; } // range of 0 - 1 (above 1 = death)
+    private float _fogCorruption; // range of 0 - 1 (above 1 = death)
+    public float FogCorruption {
+        get { return _fogCorruption; }
+        private set
+        {
+            _fogCorruption = value;
+            if (value >= 1 && _gameManager.State == GameState.Playing)
+                _gameManager.GameOver();;
+        } 
+    }
 
     private float _lastShot;
 
     [Inject]
     private void Construct(InputManager inputManager, PlayerMovement movement, ControllerSettings controllerSettings, 
-        GameplaySettings gameplaySettings, BulletManager bulletManager)
+        GameplaySettings gameplaySettings, BulletManager bulletManager, FogManager fogManager)
     {
         _inputManager = inputManager;
         _movement = movement;
         _controllerSettings = controllerSettings;
         _settings = gameplaySettings.PlayerSettings;
         _bulletManager = bulletManager;
+        _fogManager = fogManager;
     }
 
     private void Update()
@@ -76,6 +88,20 @@ public class Player : MonoBehaviour
         {
             var enemy = other.GetComponent<Enemy>();
             enemy.Attack(this);
+        }
+
+        if (other.tag == Tag.Bullet.ToString())
+        {
+            // Bullet hit
+            var bullet = other.GetComponent<Bullet>();
+            if (bullet != null && bullet.Owner == BulletOwner.Enemy && !bullet.DespawnPending)
+            {
+                // Player was hit by a enemy bullet
+                FogCorruption -= bullet.Damage;
+                _fogManager.TakeTime(bullet.Damage);
+
+                bullet.Hit(transform);
+            }
         }
     }
 

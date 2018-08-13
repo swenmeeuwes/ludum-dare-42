@@ -1,4 +1,6 @@
 ﻿public enum EnemyType
 {
-    Slow
+    Slow,
+    Fast,
+    Shooting
 }

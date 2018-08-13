@@ -96,7 +96,8 @@ public abstract class Enemy : MonoBehaviour
         else
         {
             IsBeingHit = true;
-            EnemyBody.Animator.SetTrigger("Hit");            
+            EnemyBody.Animator.SetTrigger("Hit");   
+            Invoke("OnHitAnimationFinished", 0.1f); // hack
         }
     }
 

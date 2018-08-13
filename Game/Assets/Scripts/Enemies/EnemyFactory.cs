@@ -22,6 +22,8 @@ public class EnemyFactory
         {
             case EnemyType.Fast:
                 return _container.InstantiatePrefabForComponent<SeekingEnemy>(_projectSettings.Prefabs.FastEnemy);
+            case EnemyType.Shooting:
+                return _container.InstantiatePrefabForComponent<ShootingEnemy>(_projectSettings.Prefabs.ShootingEnemy);
             default:
             case EnemyType.Slow:
                 return _container.InstantiatePrefabForComponent<SeekingEnemy>(_projectSettings.Prefabs.SlowEnemy);
