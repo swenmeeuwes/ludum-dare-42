@@ -124,8 +124,8 @@ public class Player : MonoBehaviour
                 {
                     case PowerupType.FireRate:
                         Stats.FireRate -= 0.05f;
-                        if (Stats.FireRate < 0.05f)
-                            Stats.FireRate = 0.05f;
+                        if (Stats.FireRate < 0.15f)
+                            Stats.FireRate = 0.15f;
                         break;
                     case PowerupType.Damage:
                     default:

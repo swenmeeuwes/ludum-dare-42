@@ -227,22 +227,22 @@ Prefab:
     - target: {fileID: 212479371557010590, guid: e708dae3f7c1b1b4a912f4ed3ef18b48,
         type: 2}
       propertyPath: m_Color.a
-      value: 0.88235295
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 212314903531214358, guid: e708dae3f7c1b1b4a912f4ed3ef18b48,
         type: 2}
       propertyPath: m_Color.a
-      value: 0.88235295
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 212875000071434680, guid: e708dae3f7c1b1b4a912f4ed3ef18b48,
         type: 2}
       propertyPath: m_Color.a
-      value: 0.88235295
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 212622562044444020, guid: e708dae3f7c1b1b4a912f4ed3ef18b48,
         type: 2}
       propertyPath: m_Color.a
-      value: 0.88235295
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e708dae3f7c1b1b4a912f4ed3ef18b48, type: 2}
@@ -352,7 +352,7 @@ Prefab:
     - target: {fileID: 114534757155425698, guid: 6b6bf79639cc0d947bc8a1bae2a472fc,
         type: 2}
       propertyPath: m_CropFrameY
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114534757155425698, guid: 6b6bf79639cc0d947bc8a1bae2a472fc,
         type: 2}

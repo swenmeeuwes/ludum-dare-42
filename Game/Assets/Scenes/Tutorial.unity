@@ -432,6 +432,11 @@ Prefab:
       propertyPath: m_BackGroundColor.b
       value: 0.019607844
       objectReference: {fileID: 0}
+    - target: {fileID: 114534757155425698, guid: 6b6bf79639cc0d947bc8a1bae2a472fc,
+        type: 2}
+      propertyPath: m_CropFrameY
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b6bf79639cc0d947bc8a1bae2a472fc, type: 2}
   m_IsPrefabAsset: 0
