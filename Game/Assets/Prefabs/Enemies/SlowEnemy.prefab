@@ -183,11 +183,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Stats:
     Health: 2
-    Speed: 0.3
+    Speed: 0.6
     PointsWorth: 1
     SecondsWorth: 5
+    FogCorruptionPerSecond: 5
     CorruptionPerSecond: 0.1
-  _enemyBody: {fileID: 114279841276793840}
+  EnemyBody: {fileID: 114279841276793840}
 --- !u!114 &114279841276793840
 MonoBehaviour:
   m_ObjectHideFlags: 1
