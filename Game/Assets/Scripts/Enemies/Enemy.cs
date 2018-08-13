@@ -12,6 +12,7 @@ public class EnemySettings
     public float Speed;
     public int PointsWorth;
     public float SecondsWorth;
+    [Range(0, 1)] public float CorruptionPerSecond;
 }
 
 public abstract class Enemy : MonoBehaviour
@@ -30,12 +31,21 @@ public abstract class Enemy : MonoBehaviour
 
     protected bool IsBeingHit;
     protected bool IsDieing;
+    
+    public bool IsAttacking { get { return _playerBeingAttacked != null; } }
+    private Player _playerBeingAttacked;
 
     [Inject]
     private void Construct(SignalBus signalBus, EnemySpawner enemySpawner)
     {
         SignalBus = signalBus;
         _enemySpawner = enemySpawner;
+    }
+
+    protected virtual void Update()
+    {
+        if (IsAttacking)
+            _playerBeingAttacked.Corrupt(Stats.CorruptionPerSecond * Time.deltaTime);
     }
 
     private void OnDestroy()
@@ -57,6 +67,16 @@ public abstract class Enemy : MonoBehaviour
                 bullet.Hit(transform);
             }
         }
+    }
+
+    public virtual void Attack(Player player)
+    {
+        _playerBeingAttacked = player;
+    }
+
+    public virtual void StopAttack(Player player)
+    {
+        _playerBeingAttacked = null;
     }
 
     public virtual void Damage(int amount)

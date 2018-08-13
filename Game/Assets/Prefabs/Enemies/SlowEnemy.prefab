@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 58557514494707320}
   m_Layer: 0
   m_Name: SlowEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -183,9 +183,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Stats:
     Health: 2
-    Speed: 0.6
+    Speed: 0.3
     PointsWorth: 1
     SecondsWorth: 5
+    CorruptionPerSecond: 0.1
   _enemyBody: {fileID: 114279841276793840}
 --- !u!114 &114279841276793840
 MonoBehaviour:

@@ -71,12 +71,29 @@ public class Player : MonoBehaviour
     {
         if (other.tag == Tag.Fog.ToString())
             IsInFog = true;
+
+        if (other.tag == Tag.Enemy.ToString())
+        {
+            var enemy = other.GetComponent<Enemy>();
+            enemy.Attack(this);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.tag == Tag.Fog.ToString())
             IsInFog = false;
+
+        if (other.tag == Tag.Enemy.ToString())
+        {
+            var enemy = other.GetComponent<Enemy>();
+            enemy.StopAttack(this);
+        }
+    }
+
+    public void Corrupt(float amount)
+    {
+        FogCorruption += amount + _settings.FogCorruptionRestoreRate * Time.deltaTime; // + restore compensation
     }
 
     public void FadeIn(float waitTime, float duration)

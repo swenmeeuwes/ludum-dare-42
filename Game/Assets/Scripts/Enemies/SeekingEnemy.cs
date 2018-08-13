@@ -19,9 +19,11 @@ public class SeekingEnemy : Enemy
         _player = player;
     }
 
-    private void Update()
+    protected override void Update()
     {
-        if (IsBeingHit || IsDieing)
+        base.Update();
+
+        if (IsBeingHit || IsDieing || IsAttacking)
             return;
 
         var directionToPlayer = (_player.transform.position - transform.position).normalized;

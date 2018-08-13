@@ -2,5 +2,6 @@
 {
     Bullet,
     Player,
-    Fog
+    Fog,
+    Enemy
 }
