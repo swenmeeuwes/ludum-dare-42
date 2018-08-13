@@ -21,12 +21,7 @@ public class JoystickEventSystem : EventSystem
     {
         base.Start();
 
-        if (firstSelectedGameObject == null)
-        {
-            var firstButton = FindObjectOfType<Button>();
-            if (firstButton != null)
-                firstSelectedGameObject = firstButton.gameObject;
-        }
+        ScanForButtons();
     }
 
     protected override void Update()
@@ -40,6 +35,16 @@ public class JoystickEventSystem : EventSystem
             Input.GetAxisRaw(InputAxes.Vertical) < -_deadZone))
         {
             SetSelectedGameObject(firstSelectedGameObject);
+        }
+    }
+
+    public void ScanForButtons()
+    {
+        if (firstSelectedGameObject == null)
+        {
+            var firstButton = FindObjectOfType<Button>();
+            if (firstButton != null)
+                firstSelectedGameObject = firstButton.gameObject;
         }
     }
 }
