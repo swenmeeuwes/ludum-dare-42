@@ -39,12 +39,19 @@ public class ProjectInstaller : MonoInstaller
 
         Container
             .BindInterfacesAndSelfTo<InputManager>()
-            .AsSingle();            
+            .AsSingle();
 
         Container
             .BindInterfacesAndSelfTo<ScreenFactory>()
             .AsSingle()
-            .WithArguments(_settings.Prefabs.ScreenRoot);
+            .WithArguments(_settings.Prefabs.ScreenRoot)
+            .NonLazy();
+
+        Container
+            .Bind<JoystickEventSystem>()
+            .FromInstance(_settings.Prefabs.ScreenRoot.GetComponentInChildren<JoystickEventSystem>())
+            .AsSingle();
+            
 
         Container
             .Bind<ScreenContext>()

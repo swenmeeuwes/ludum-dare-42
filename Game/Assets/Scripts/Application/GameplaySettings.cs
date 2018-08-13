@@ -26,6 +26,8 @@ public class GameplaySettings : ScriptableObject
 
     [Tooltip("Vertical Axis: The amount of time in seconds it takes for monsters to spawn, Horizontal Axis: Time elapsed")]
     public AnimationCurve SpawnCurve;
+    [Tooltip("Vertical Axis: The amount of monsters that will be created per spawn, Horizontal Axis: Time elapsed")]
+    public AnimationCurve SpawnAmountCurve;
 
     public int MaxEnemies;
 }

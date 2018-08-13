@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using Zenject;
 
+[RequireComponent(typeof(ZenjectBinding))]
 public abstract class ScreenController : MonoBehaviour
 {
     protected Animator Animator;

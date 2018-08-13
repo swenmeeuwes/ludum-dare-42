@@ -16,7 +16,10 @@ public class GameManager : IInitializable, IDisposable
 
     #endregion
 
-    private float _timeStarted;
+    public GameState State { get; set; }
+
+    public float TimeStarted { get; private set; }
+    public static float TimeScore { get; private set; } // will be set once game over + quick static hack..
 
     [Inject]
     private void Construct(SignalBus signalBus, Player player, FogManager fogManager, MonoBehaviourUtil monoBehaviourUtil, GameplaySettings gameplaySettings, EnemySpawner enemySpawner)
@@ -31,6 +34,8 @@ public class GameManager : IInitializable, IDisposable
 
     public void Initialize()
     {
+        State = GameState.Idle;
+
         _monoBehaviourUtil.StartCoroutine(StartGame());
 
         _signalBus.Subscribe<EnemyKilledSignal>(OnEnemyKilled);
@@ -39,6 +44,23 @@ public class GameManager : IInitializable, IDisposable
     public void Dispose()
     {
         _signalBus.Unsubscribe<EnemyKilledSignal>(OnEnemyKilled);
+    }
+
+    public void GameOver()
+    {
+        if (State == GameState.GameOver)
+            return;
+
+        TimeScore = Time.time - TimeStarted;
+
+        State = GameState.GameOver;
+
+        _player.Enabled = false;
+
+        _signalBus.Fire(new OpenScreenRequestSignal
+        {
+            Type = ScreenType.GameOver
+        });
     }
 
     private void OnEnemyKilled(EnemyKilledSignal signal)
@@ -59,7 +81,8 @@ public class GameManager : IInitializable, IDisposable
 
         _fogManager.Shrinking = true;
 
-        _timeStarted = Time.time;
+        TimeStarted = Time.time;
+        State = GameState.Playing;
 
         yield return new WaitForSeconds(1f);
 
@@ -68,9 +91,17 @@ public class GameManager : IInitializable, IDisposable
 
     private IEnumerator SpawnLoop()
     {
-        var nextSpawn = _gameplaySettings.SpawnCurve.Evaluate(Time.time - _timeStarted);
+        if (State != GameState.Playing)
+            yield break;
 
-        _enemySpawner.Spawn();
+        var timePlaying = Time.time - TimeStarted;
+        var nextSpawn = _gameplaySettings.SpawnCurve.Evaluate(timePlaying);
+        var spawnAmount = Mathf.RoundToInt(_gameplaySettings.SpawnAmountCurve.Evaluate(timePlaying));
+
+        for (var i = 0; i < spawnAmount; i++)
+        {            
+            _enemySpawner.Spawn();
+        }
 
         yield return new WaitForSeconds(nextSpawn);
 

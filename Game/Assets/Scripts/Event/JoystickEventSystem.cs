@@ -44,7 +44,19 @@ public class JoystickEventSystem : EventSystem
         {
             var firstButton = FindObjectOfType<Button>();
             if (firstButton != null)
+            {
                 firstSelectedGameObject = firstButton.gameObject;
+                SetSelectedGameObject(firstSelectedGameObject);
+            }
+            else
+            {
+                firstButton = FindObjectOfType<ButtonSelectionArrows>();
+                if (firstButton != null)
+                {
+                    firstSelectedGameObject = firstButton.gameObject;
+                    SetSelectedGameObject(firstSelectedGameObject);
+                }
+            }
         }
     }
 }

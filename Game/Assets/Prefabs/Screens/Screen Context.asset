@@ -15,3 +15,6 @@ MonoBehaviour:
   - Type: 0
     Transform: {fileID: 224742338543237254, guid: 017127407ef49234db10831aeb6655af,
       type: 2}
+  - Type: 1
+    Transform: {fileID: 224768714273755442, guid: 6f3e8d26e87cf54448273eab7449cde9,
+      type: 2}

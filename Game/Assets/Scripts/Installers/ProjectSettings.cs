@@ -8,6 +8,7 @@ public class Prefabs
     public GameObject Bullet;
     public GameObject SlowEnemy;
     public GameObject FastEnemy;
+    public GameObject ShootingEnemy;
 }
 
 [CreateAssetMenu(fileName = "Project Settings", menuName = "Settings/Project Settings")]

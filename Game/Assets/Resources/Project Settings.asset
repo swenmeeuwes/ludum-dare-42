@@ -22,3 +22,5 @@ MonoBehaviour:
       type: 2}
     FastEnemy: {fileID: 1408833615104576, guid: 541ae34ce37f55b49b20ed31ba7d2c55,
       type: 2}
+    ShootingEnemy: {fileID: 1408833615104576, guid: 99092174f6cbce348a819fd9b6872378,
+      type: 2}
