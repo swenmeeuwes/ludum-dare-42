@@ -48,7 +48,7 @@ public class TutorialManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.P))
         {
             StopAllCoroutines();
             StartCoroutine(SkipTutorial());
