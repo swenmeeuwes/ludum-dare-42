@@ -12,18 +12,20 @@ public class EnemySettings
     public float Speed;
     public int PointsWorth;
     public float SecondsWorth;
+    [Tooltip("The amount of seconds it takes from the fog shrink duration per second")] public float FogCorruptionPerSecond;
     [Range(0, 1)] public float CorruptionPerSecond;
 }
 
 public abstract class Enemy : MonoBehaviour
 {
     [SerializeField] protected EnemySettings Stats;
-    [SerializeField] private EnemyBody _enemyBody;
+    [SerializeField] protected EnemyBody EnemyBody;
 
     #region Injected
 
     protected SignalBus SignalBus;
     private EnemySpawner _enemySpawner;
+    private FogManager _fogManager;
 
     #endregion
 
@@ -36,16 +38,20 @@ public abstract class Enemy : MonoBehaviour
     private Player _playerBeingAttacked;
 
     [Inject]
-    private void Construct(SignalBus signalBus, EnemySpawner enemySpawner)
+    private void Construct(SignalBus signalBus, EnemySpawner enemySpawner, FogManager fogManager)
     {
         SignalBus = signalBus;
         _enemySpawner = enemySpawner;
+        _fogManager = fogManager;
     }
 
     protected virtual void Update()
     {
         if (IsAttacking)
+        {
+            _fogManager.TakeTime(Stats.FogCorruptionPerSecond * Time.deltaTime);
             _playerBeingAttacked.Corrupt(Stats.CorruptionPerSecond * Time.deltaTime);
+        }
     }
 
     private void OnDestroy()
@@ -90,7 +96,7 @@ public abstract class Enemy : MonoBehaviour
         else
         {
             IsBeingHit = true;
-            _enemyBody.Animator.SetTrigger("Hit");            
+            EnemyBody.Animator.SetTrigger("Hit");            
         }
     }
 
@@ -102,9 +108,9 @@ public abstract class Enemy : MonoBehaviour
         });
 
         IsDieing = true;
-        _enemyBody.Animator.SetTrigger("Die");
+        EnemyBody.Animator.SetTrigger("Die");
 
-        _enemyBody.SpriteRenderer.DOFade(0f, 0.5f);
+        EnemyBody.SpriteRenderer.DOFade(0f, 0.5f);
     }
 
     public void OnHitAnimationFinished()
