@@ -4,7 +4,7 @@ using Unity.Collections;
 using UnityEngine;
 using Zenject;
 
-[RequireComponent(typeof(PlayerMovement))]
+[RequireComponent(typeof(PlayerMovement), typeof(AudioSource))]
 public class Player : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer[] _parts; // For fading
@@ -43,11 +43,17 @@ public class Player : MonoBehaviour
         {
             _fogCorruption = value;
             if (value >= 1 && _gameManager.State == GameState.Playing)
+            {
+                _dieAudioSource.Play();
                 _gameManager.GameOver();
+            }
         } 
     }
 
     private float _lastShot;
+
+    [SerializeField] private AudioSource _shootAudioSource;
+    [SerializeField] private AudioSource _dieAudioSource;
 
     [Inject]
     private void Construct(InputManager inputManager, PlayerMovement movement, ControllerSettings controllerSettings, 
@@ -217,5 +223,6 @@ public class Player : MonoBehaviour
         _lastShot = Time.time;
 
         _bulletManager.Create(BulletOwner.Player, transform.position, LookDirection.normalized * _settings.BulletSpeed);
+        _shootAudioSource.Play();
     }
 }

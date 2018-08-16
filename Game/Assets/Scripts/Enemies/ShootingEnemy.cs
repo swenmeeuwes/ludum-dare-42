@@ -6,7 +6,7 @@ using Zenject;
 /// <summary>
 /// An enemy type which seeks the player and fires bullets at it when in range
 /// </summary>
-[RequireComponent(typeof(ZenjectBinding))]
+[RequireComponent(typeof(ZenjectBinding), typeof(AudioSource))]
 public class ShootingEnemy : Enemy
 {
     [SerializeField] private Transform _bulletOrigin;
@@ -21,6 +21,8 @@ public class ShootingEnemy : Enemy
 
     #endregion
 
+    private AudioSource _audioSource;
+
     private float _lastShot;
 
     [Inject]
@@ -32,6 +34,7 @@ public class ShootingEnemy : Enemy
 
     protected void Start()
     {
+        _audioSource = GetComponent<AudioSource>();
         _lastShot = Time.time;
     }
 
@@ -89,6 +92,8 @@ public class ShootingEnemy : Enemy
         { 
             _bulletManager.Create(BulletOwner.Enemy,
                 bulletOrigin, vectorToPlayer.normalized * _bulletSpeed);
+            _audioSource.Play();
+
             yield return new WaitForSeconds(0.1f);
         }
     }

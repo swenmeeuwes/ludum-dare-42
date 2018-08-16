@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using Zenject;
 
 public class StartScreenController : MonoBehaviour
@@ -27,10 +28,19 @@ public class StartScreenController : MonoBehaviour
             && !_isLoading)
         {
             _isLoading = true;
-            _signalBus.Fire(new LoadSceneSignal
-            {
-                Scene = _nextScene
-            });
+            StartCoroutine(StartGame());
         }
+    }
+
+    private IEnumerator StartGame()
+    {
+        var audioSource = GetComponent<AudioSource>();
+        audioSource.Play();
+        yield return new WaitUntil(() => !audioSource.isPlaying);
+
+        _signalBus.Fire(new LoadSceneSignal
+        {
+            Scene = _nextScene
+        });
     }
 }
